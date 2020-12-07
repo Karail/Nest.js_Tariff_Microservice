@@ -1,0 +1,1 @@
+export { TariffConsumer } from './tariff.consumer';

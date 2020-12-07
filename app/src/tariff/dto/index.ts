@@ -1,0 +1,1 @@
+export { UpsertTariffDto } from './upsert.dto';

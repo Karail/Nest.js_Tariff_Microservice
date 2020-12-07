@@ -1,0 +1,39 @@
+version: '3'
+services:
+
+  app:
+    container_name: app
+    restart: always
+    command: npm run start:dev
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    links:
+      - mysql
+      - redis
+    depends_on:
+      - mysql
+      - redis
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/usr/src/app
+
+  mysql:
+    container_name: mysql
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tariffdb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    volumes:
+      - ./data/db:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  redis:
+    container_name: redis
+    image: redis:alpine
+
+volumes:
+  data:

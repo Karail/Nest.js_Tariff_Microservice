@@ -1,0 +1,1 @@
+export { BaseConsumer } from './base.consumer';
