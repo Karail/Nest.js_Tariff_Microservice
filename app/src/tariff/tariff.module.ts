@@ -9,7 +9,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 // Models
 import { Tariff } from './models';
 // Modules
-import { bullQueueModule } from 'src/shared/dynamic-modules';
+import { bullQueueModule } from '../shared/dynamic-modules';
 
 @Module({
   imports: [

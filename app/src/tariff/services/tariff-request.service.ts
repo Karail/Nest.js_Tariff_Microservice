@@ -2,7 +2,7 @@ import { InjectQueue } from '@nestjs/bull';
 import { Injectable, Logger } from '@nestjs/common';
 import { Job, JobOptions, Queue } from 'bull';
 // Interfaces
-import { JobResult } from 'src/shared/interfaces';
+import { JobResult } from '../../shared/interfaces';
 import { JobTariffCheck, JobTariffRequest } from '../interfaces';
 // Queues
 import { TARIFF_CHECK } from '../consumers/tariff.consumer';

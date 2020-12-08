@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateOptions, FindOptions, UpsertOptions } from 'sequelize';
+import { CreateOptions, FindOptions, UpdateOptions } from 'sequelize';
+// Interfaces
+import { TariffInterface } from '../interfaces';
 // Models
 import { Tariff } from '../models';
 
@@ -23,23 +25,32 @@ export class TariffService {
      * find one tariff
      * @param {FindOptions} options 
      */
-    public async findOne(options?: FindOptions): Promise<Tariff | null> {
+    public async findOne(options: FindOptions): Promise<Tariff | null> {
         return this.tariffModel.findOne(options);
     }
 
     /**
      * create tariff
-     * @param {CreateOptions} options 
+     * @param {CreateOptions & TariffInterface} options 
      */
-    public async create(options?: CreateOptions): Promise<Tariff> {
+    public async create(options: TariffInterface & CreateOptions): Promise<Tariff> {
         return this.tariffModel.create(options);
     }
 
     /**
-     * upsert tariff
-     * @param {UpsertOptions} options 
+     * update tariff
+     * @param {any} values 
+     * @param {UpdateOptions} options 
      */
-    public async upsert(values: any, options?: UpsertOptions & { returning?: false }): Promise<boolean> {
-        return this.tariffModel.upsert(values, options);
+    public async update(values: any, options: UpdateOptions): Promise<[number, Tariff[]]> {
+        return this.tariffModel.update(values, options);
+    }
+
+    /**
+     * destroy tariff
+     * @param {FindOptions} condition 
+     */
+    public async delete(condition: FindOptions): Promise<number> {
+        return this.tariffModel.destroy(condition);
     }
 }

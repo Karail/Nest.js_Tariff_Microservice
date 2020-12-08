@@ -14,6 +14,12 @@ export class Tariff extends Model<Tariff> {
   @Column(DataType.INTEGER)
   tariffType!: TariffTypeEnum;
 
+  @Column(DataType.INTEGER)
+  tariffId!: number;
+
+  @Column(DataType.INTEGER)
+  countChannels!: number;
+
   @Column(DataType.DATE)
   expiryDate!: Date;
 
