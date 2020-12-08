@@ -29,14 +29,7 @@ export class TariffCheckService {
 
             expiryDate.setDate(expiryDate.getDate() - 5);
 
-            if (expiryDate <= date) {
-                // Tariff expires in five days
-                this.sendWarning({
-                    tariff,
-                    msg: 'Tariff expires in five days'
-                });
-            }
-            else if (tariff.expiryDate <= date) {
+            if (new Date(tariff.expiryDate) <= date) {
                 // The tariff has expired
                 const data = await this.needToExtend(tariff);
 
@@ -47,9 +40,17 @@ export class TariffCheckService {
 
                     this.tariffService.update(
                         { expiryDate: newExpiryDate },
-                        { where: { tatiffId: tariff.tariffId } })
+                        { where: { tariffId: tariff.tariffId } })
                 }
             }
+            else if (expiryDate <= date) {
+                // Tariff expires in five days
+                this.sendWarning({
+                    tariff,
+                    msg: 'Tariff expires in five days'
+                });
+            }
+             
 
             console.log(tariff);
 
